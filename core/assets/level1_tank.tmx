@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="60" height="60" tilewidth="4" tileheight="4" nextobjectid="48">
+ <tileset firstgid="1" name="NES - Battle City JPN - General Sprites" tilewidth="16" tileheight="16" tilecount="400" columns="25">
+  <image source="assets_tanks.png" width="400" height="256"/>
+  <tile id="0">
+   <animation>
+    <frame tileid="0" duration="100"/>
+    <frame tileid="1" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="91">
+   <animation>
+    <frame tileid="91" duration="100"/>
+    <frame tileid="92" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="166">
+   <animation>
+    <frame tileid="166" duration="100"/>
+    <frame tileid="167" duration="100"/>
+    <frame tileid="168" duration="100"/>
+    <frame tileid="169" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="190">
+   <animation>
+    <frame tileid="190" duration="100"/>
+    <frame tileid="189" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="192">
+   <animation>
+    <frame tileid="192" duration="100"/>
+    <frame tileid="144" duration="100"/>
+    <frame tileid="192" duration="100"/>
+    <frame tileid="192" duration="100"/>
+    <frame tileid="192" duration="100"/>
+    <frame tileid="192" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="216">
+   <animation>
+    <frame tileid="216" duration="100"/>
+    <frame tileid="217" duration="100"/>
+    <frame tileid="218" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="235">
+   <animation>
+    <frame tileid="235" duration="100"/>
+    <frame tileid="236" duration="100"/>
+   </animation>
+  </tile>
+  <tile id="285">
+   <animation>
+    <frame tileid="285" duration="100"/>
+    <frame tileid="85" duration="100"/>
+    <frame tileid="85" duration="100"/>
+   </animation>
+  </tile>
+ </tileset>
+ <layer name="tło" width="60" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt08EJwCAQBMArKE3ZhW3YcT55yCFCQiAa5mBefnb1rBFRAQAAAABgISXpJ5+VBfK+2btdRrNz3/69Wsx7tuTr7Hfl/LnzzB/2evRHZ2rs3ffpnXydCQAAAAAA2NOxQAZgLyfPv5Bj
+  </data>
+ </layer>
+ <layer name="grafika" width="60" height="60">
+  <data encoding="base64" compression="zlib">
+   eJzt1bkNgFAMREFaoA2OLoAq6L8OCIhAhJ8V8kyykqOXuesAAAAAoIY1HQAABS3pAAA47ekAAChoSAcAQEF9OgBoarot/zamA3ho8Ufna7eX+1cOy8UCVQ==
+  </data>
+ </layer>
+ <objectgroup name="lód">
+  <object id="41" x="76" y="68" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="woda" offsetx="-0.25" offsety="0">
+  <object id="39" x="76" y="128" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="krzaki">
+  <object id="38" x="76" y="100" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="ściany">
+  <object id="32" x="0" y="0" height="240"/>
+  <object id="33" x="0" y="0" width="240"/>
+  <object id="34" x="240" y="0" height="240"/>
+  <object id="35" x="0" y="240" width="240"/>
+ </objectgroup>
+ <objectgroup name="mur">
+  <object id="36" x="76" y="192" width="16" height="16"/>
+  <object id="44" name="mur" x="20.3333" y="223.667" width="16" height="16"/>
+  <object id="47" x="19" y="197" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup name="metal">
+  <object id="40" x="76" y="160" width="16" height="16"/>
+ </objectgroup>
+</map>
