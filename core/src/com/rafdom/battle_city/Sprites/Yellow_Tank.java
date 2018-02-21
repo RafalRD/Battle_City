@@ -56,7 +56,9 @@ public class Yellow_Tank extends Sprite
     private float timerShovelRaised;
     private float timerEnemyAppear;
     private float timerOurBullet;
-    private float howManyTanksToDestroyed;
+    private float timerLevelComplete;
+
+    private int howManyTanksWereDestroyed;
     private int x;
     private int y;
     private int howManyStarsWeHave;
@@ -64,6 +66,7 @@ public class Yellow_Tank extends Sprite
     private int itemType;
     private int timerFence;
 
+    private boolean levelCompleate;
     private boolean standingUP;
     private boolean standingRightLeft;
     private boolean standingRight;
@@ -103,19 +106,22 @@ public class Yellow_Tank extends Sprite
 
         currentState = State.STANDING_UP_DOWN;
         previousState = State.STANDING_UP_DOWN;
+
+        timerLevelComplete = 0;
         timer = 0;
         timer1 = 0;
         timerEnemyAppear =0;
         timerOurBullet =0;
         timerShovelRaised =0;
-        howManyTanksToDestroyed = 0;
+        howManyTanksWereDestroyed = 0;
 
         x = 32;
         y = 18;
-        howManyStarsWeHave =0;
+        howManyStarsWeHave = 0;
         health = 2;
         itemType =0;
 
+        levelCompleate = false;
         standingUP = true;
         standingRightLeft = false;
         standingRight = true;
@@ -225,6 +231,7 @@ public class Yellow_Tank extends Sprite
 
     public void update (float delta) {
 
+
         if(renderFence) {
             for (MapObject object : map.getLayers().get(9).getObjects().getByType(RectangleMapObject.class)) {
                 new EagleFence(screen,object);
@@ -267,7 +274,7 @@ public class Yellow_Tank extends Sprite
                 grenadeRaised =false;
             }
 
-            if (enemy.tankExists()  ){ // if ourTankHiT
+            if (enemy.tankExists()  ){ // if our bullet hit enemy
                 timer1 +=Gdx.graphics.getDeltaTime();
                 getCell_tanks(x,y).setTile(null);
 
@@ -302,6 +309,11 @@ public class Yellow_Tank extends Sprite
                         x=32;
                         y++;
                     } // end animation
+                }
+                // 20 tanks && y is on the last animation (28)
+                if(howManyTanksWereDestroyed == 20 && y == 28)
+                {
+                    screen.levelComplete();
                 }
             }
         }
@@ -593,20 +605,21 @@ public class Yellow_Tank extends Sprite
         }
     }
 
-    public void cereateEnemy()
+    public void createEnemy()
     {
+
 
         if (enemies_1.size == 4 ) // too early
         {
             timerEnemyAppear =0;
         }
-        if(enemies_1.size <4 && timerEnemyAppear >1.9 && howManyTanksToDestroyed <20){
+        if(enemies_1.size <4 && timerEnemyAppear >1.9 && howManyTanksWereDestroyed <20){
             if(playMusic) {
                 Tanks.manager.get("stage_start.wav", Music.class).play();
                 playMusic = false;
             }
 
-            howManyTanksToDestroyed++;
+            howManyTanksWereDestroyed++;
             timerEnemyAppear =0;
             enemies_1.add(new Enemy_1(screen));
         }
@@ -658,7 +671,7 @@ public class Yellow_Tank extends Sprite
                 starRaised();
                 break;
             case 20:
-                PodniesionoGranat();
+                grenadeRaised();
                 break;
             case 21:
                 healthRaised();
@@ -709,7 +722,16 @@ public class Yellow_Tank extends Sprite
         replacingTheBlock(34,10,16,2);
     }
 
-    public void PodniesionoGranat(){
+    public void grenadeRaised(){
         grenadeRaised = true;
+    }
+
+    public void levelComplete(){
+
+//        timerLevelComplete += Gdx.graphics.getDeltaTime();
+        if(howManyTanksWereDestroyed == 20)
+        {
+            levelCompleate = true;
+        }
     }
 }

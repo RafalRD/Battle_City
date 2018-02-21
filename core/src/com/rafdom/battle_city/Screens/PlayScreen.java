@@ -30,6 +30,7 @@ public class PlayScreen implements Screen
     public World world;
 
     private boolean gameOver;
+    private boolean levelComplete;
 
 
     private Box2DDebugRenderer b2dr;
@@ -44,7 +45,7 @@ public class PlayScreen implements Screen
 
     private B2WorldCreator creator;
     private TextureAtlas atlas;
-    private float timeToGameOver;
+    private float timeToEndGame;
 
 
 
@@ -54,8 +55,10 @@ public class PlayScreen implements Screen
     public PlayScreen(Tanks game)
     {
 
-        gameOver = false;
         this.game = game;
+
+        levelComplete = false;
+        gameOver = false;
 
 
         atlas = new TextureAtlas("tanks_texture.pack");
@@ -112,6 +115,9 @@ public class PlayScreen implements Screen
         }
     }
 
+    public void levelComplete(){
+        levelComplete = true;
+    }
     public void gameOver(){
         gameOver = true;}
 
@@ -123,11 +129,13 @@ public class PlayScreen implements Screen
     public void update (float delta)
     {
         handleInput();
-        yellow_tank.cereateEnemy();
+        yellow_tank.createEnemy();
 
         world.step(1/60f,6,2); //update 1 steps per 60 sec
 
         yellow_tank.update(delta);
+
+
 
     }
 
@@ -142,6 +150,9 @@ public class PlayScreen implements Screen
         orthogonalTiledMapRenderer.render();
         orthogonalTiledMapRenderer.setView(camera);
 
+        // render debug lines
+        b2dr.render(world,camera.combined);
+
         game.batch.setProjectionMatrix(camera.combined);
 
         game.batch.begin(); //batch open
@@ -152,11 +163,21 @@ public class PlayScreen implements Screen
         game.batch.end(); // batch close
 
         if (gameOver) {
-        timeToGameOver +=delta;
-            if( timeToGameOver >0.5) {
+        timeToEndGame +=delta;
+            if( timeToEndGame >0.5) {
                 game.setScreen(new GameOver(game));
-                timeToGameOver = 0;
-                camera.update();
+                timeToEndGame = 0;
+                dispose();
+            }
+        }
+        if(levelComplete){
+
+            timeToEndGame +=delta;
+
+            if(timeToEndGame >1.5)
+            {
+                game.setScreen(new LevelComplete(game));
+                timeToEndGame = 0;
                 dispose();
             }
         }
